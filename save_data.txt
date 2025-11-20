@@ -1,0 +1,9 @@
+{
+    "chapter": 2,
+    "checkpoint": "kantin_selesai",
+    "inventory": [
+        "sigil_kuno",
+        "sigil_kaca"
+    ],
+    "next_scene": "ruang_kelas"
+}
