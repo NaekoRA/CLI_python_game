@@ -14,7 +14,7 @@ from maze_engine import MazeGame
 from maze_map import (
     taman,
     gedung_sekolah_f2,
-    gedung_sekolah_f3,
+    gedung_sekolah_f3_no2,
     to_kantin,
     kantin,
     perpustakaan,
@@ -55,7 +55,7 @@ def start_chapter(state=None, checkpoint=None):
         state["checkpoint"] = checkpoint
     else:
         checkpoint = state.get("checkpoint", "start")
-
+    clear()
     divider()
     slow_print("kamu berhasil melewati tantangan di ruangan itu")
     slow_print(
@@ -77,6 +77,7 @@ def start_chapter(state=None, checkpoint=None):
         slow_print("keesokkan harinya kamudi temukan tewas di depan pintu F1 sekolahmu")
         return "game_over"
     elif results == "F3":
+        clear()
         slow_print("ketika kamu mesuk ke dalam ruangan ")
         slow_print(
             "kamu melihat ada seoarnag gadis berambut hitam yang sedang duduk di pojok ruangan sembari memandang langit"
@@ -129,22 +130,26 @@ def start_chapter(state=None, checkpoint=None):
 
 
 def roam5_f3(state):
-    game = MazeGame(gedung_sekolah_f3)
+    clear()
+    game = MazeGame(gedung_sekolah_f3_no2)
     results = game.start()
 
     if results == "F4":
+        clear()
         slow_print("kamu berjalan ke arah taman")
         slow_print("kamu ingin membuktikan mitos tentang siswi yang jadi hantu")
-        state.update({"chapter": 1, "checkpoint": "taman"})
+        state.update({"chapter": 2, "checkpoint": "taman"})
         save_game(state)
         return roam_taman(state)
     elif results == "F1":
+        clear()
         slow_print(
             "saat kamu membuka pintu tiba tiba ada mahluk hitam besar yang mencekik dan mematahan lehermu"
         )
         slow_print("keesokkan harinya kamudi temukan tewas di depan pintu F1 sekolahmu")
         return "game_over"
     elif results == "F3":
+        clear()
         slow_print("ketika kamu mesuk ke dalam ruangan ")
         slow_print(
             "kamu melihat ada seoarnag gadis berambut hitam yang sedang duduk di pojok ruangan sembari memandang langit"
@@ -165,6 +170,7 @@ def roam5_f3(state):
             slow_print("2:tidak")
             slow_print("3:lari")
             choice2 = input_no_empty("\n(1/2/3): ").strip().lower()
+            clear()
             if choice2 == "1":
                 slow_print("kamu menjawab iya")
                 slow_print("tiba tiba gadis itu tersenyum lebar dan melompat ke arahmu")
@@ -197,6 +203,7 @@ def roam5_f3(state):
 
 
 def roam_taman(state):
+    clear()
     slow_print(
         "Kamu berjalan menelusuri ujung lorong kelas angker itu dan berakhir di taman."
     )
@@ -234,7 +241,7 @@ def roam_taman(state):
             ]
         )
         return "game_over"
-
+    clear()
     game = MazeGame(taman)
     results = game.start()
 
@@ -264,6 +271,7 @@ def kelas(state):
     choice = input_no_empty("\n(ketik 1/2/3): ").strip()
 
     if choice == "1":
+        clear()
         slow_print("Kamu membuka lemari itu perlahan...")
         pause()
         slow_print("*BRUKK!* Lemari itu runtuh karena sudah rapuh!")
@@ -273,6 +281,7 @@ def kelas(state):
         return "game_over"
 
     elif choice == "2":
+        clear()
         slow_print(
             "Kamu membuka lemari jati itu... tapi tiba-tiba dorongan keras dari belakang membuat lemari menimpamu!"
         )
@@ -281,6 +290,7 @@ def kelas(state):
         return "game_over"
 
     elif choice == "3":
+        clear()
         slow_print("Kamu melihat kunci digital aneh di lemari etalase itu.")
         slow_print("Layar menampilkan tulisan samar:")
         slow_print("'Ketika jarum panjang di angka 12, jarum pendek di angka 3...'")
@@ -292,6 +302,7 @@ def kelas(state):
         for attempt in range(3):
             answer = input_no_empty("\nMasukkan waktu yang benar: ").strip()
             if answer in correct_answers:
+                clear()
                 slow_print("\nJam digital itu menyala... lalu berbunyi *klik!*")
                 slow_print(
                     "Lemari terbuka dan kamu menemukan foto Mbak Kunti di dalamnya."
@@ -306,27 +317,32 @@ def kelas(state):
                     "\n(1. Ambil benda itu / 2. Biarkan): "
                 ).strip()
                 if choice2 == "1":
+                    clear()
                     slow_print(
                         "Kamu mendapatkan *pecahan pipi* dan menyimpannya ke dalam tas."
                     )
                     state.setdefault("inventory", []).append("pecahan_pipi")
                 else:
+                    clear()
                     slow_print("Kamu memutuskan untuk meninggalkannya.")
 
                 state.update({"chapter": 2, "checkpoint": "taman_selesai"})
                 save_game(state)
                 return otw_kantin(state)
             else:
+                clear()
                 slow_print("Jam itu tetap mati...")
                 if attempt < 2:
                     slow_print(
                         "Coba pikir lagi... lonceng sekolah biasanya berbunyi jam berapa?"
                     )
                 else:
+                    clear()
                     slow_print("Tiba-tiba jam itu menyala merah... *ERROR!*")
                     slow_print("Layar pecah dan asap hitam memenuhi ruangan.")
                     return "game_over"
     else:
+        clear()
         slow_print(
             "Kamu kebingungan memilih... waktu habis, dan suara tawa Mbak Kunti menggema di belakangmu."
         )
@@ -339,6 +355,7 @@ def otw_kantin(state):
     slow_print("Dan keluar dengan tenang dari kelas itu")
     slow_print("kamupun berjalan menuju kantin")
     input_no_empty("\nmasuk '1' untuk melanjutkan...")
+    clear()
     game = MazeGame(to_kantin)
     results = game.start()
     if results == "WIN":
@@ -346,6 +363,7 @@ def otw_kantin(state):
         state.update({"chapter": 2, "checkpoint": "kantin"})
         save_game(state)
         return area_kantin(state)
+
 
 
 def area_kantin(state):
@@ -367,6 +385,7 @@ def area_kantin(state):
         pause()
         while skor_pemain < 3 and skor_bayangan < 3:
             divider()
+            print(f"(Kamu: {skor_pemain} | Bayangan: {skor_bayangan})")
             player_choice = input_no_empty(
                 "\nPilih (1:gunting, 2:batu, 3:kertas): "
             ).strip()
@@ -374,14 +393,18 @@ def area_kantin(state):
                 slow_print(
                     "Bayangan itu tertawa... 'Kau bahkan tak tahu cara bermainnya?'"
                 )
+                pause()
                 continue
 
             player_choice = map_input[player_choice]
             enemy_choice = random.choice(pilihan)
             slow_print(f"Bayangan itu memilih: {enemy_choice}")
+            pause()
 
             if player_choice == enemy_choice:
                 slow_print("Seri... Bayangan itu menatapmu tanpa ekspresi.")
+                pause()
+                clear()
             elif (
                 (player_choice == "gunting" and enemy_choice == "kertas")
                 or (player_choice == "batu" and enemy_choice == "gunting")
@@ -391,11 +414,15 @@ def area_kantin(state):
                 slow_print(
                     f"Kamu menang ronde ini! (Kamu: {skor_pemain} | Bayangan: {skor_bayangan})"
                 )
+                pause()
+                clear()
             else:
                 skor_bayangan += 1
                 slow_print(
                     f"Kamu kalah ronde ini... (Kamu: {skor_pemain} | Bayangan: {skor_bayangan})"
                 )
+                pause()
+                clear()
 
         divider()
         if skor_pemain == 3:
@@ -482,8 +509,12 @@ def perpus(state):
         if answer == q["answer"]:
             slow_print("✅ Benar!")
             score += 1
+            pause()
+            clear()
         else:
             slow_print("❌ Salah!")
+            pause()
+            clear()
 
     divider()
     slow_print(f"Kamu menjawab benar {score} dari {len(questions)} soal.")
@@ -522,6 +553,7 @@ def area_masjid(state):
     slow_print("di area masjid kamu melihat ada satpam yang sedang berjaga")
     slow_print("kamu harus bisa ke aula tanpa tertangkap satpam")
     input_no_empty("\nmasuk '1' untuk melanjutkan...")
+    clear()
     game = MazeGame(masjid)
     results = game.start()
     if results == "F2":
@@ -529,11 +561,11 @@ def area_masjid(state):
         state.update({"chapter": 2, "checkpoint": "area_masjid"})
         save_game(state)
         return otw_aula(state)
-    if results == "F1":
+    elif results == "F1":
         slow_print("kamu menuju aula")
         state.update({"chapter": 2, "checkpoint": "masjid_selesai"})
         save_game
-        return akhir
+        return akhir(state)
 
 
 def otw_aula(state):
@@ -548,6 +580,7 @@ def otw_aula(state):
     slow_print("pergilah ke aula")
     slow_print("sekarang saatnya menyelesaikan semuanya.....")
     input_no_empty("\nmasuk '1' untuk melanjutkan...")
+    clear()
     game = MazeGame(masjid2)
     results = game.start()
     if results == "F1":

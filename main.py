@@ -19,7 +19,7 @@ def main():
     clear()
     divider()
     for line in logo:
-        slow_print(line,delay=0.0001)
+        print(line)
     print("Main Menu")
     print("1. New Game")
     print("2. Load Game")
@@ -27,7 +27,7 @@ def main():
     print("4. Keluar")
 
     choice = input_no_empty("\nPilih opsi (1/2/3/4): ").strip()
-
+    clear
     # --- PILIHAN MENU ---
     if choice == "2":
         # LOAD GAME
@@ -41,6 +41,7 @@ def main():
             print(f"  Checkpoint: {state['checkpoint']}")
             print(f"  Inventory : {state['inventory']}")
             input("\nTekan Enter untuk melanjutkan dari titik terakhir...")
+            clear()
 
     elif choice == "3":
         delete_save()
@@ -92,4 +93,9 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        clear()
+        print("\n\n❌ Program dihentikan oleh pengguna (Ctrl+C).")
+        

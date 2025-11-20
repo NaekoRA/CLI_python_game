@@ -107,7 +107,7 @@ def roam1(state):
     slow_print(
         "Gunakan tombol W A S D untuk bergerak dan capai titik 'F' untuk keluar."
     )
-    pause()
+    input_no_empty('masukkan "1" untuk melanjutkan')
 
     game = MazeGame(Lapangan)
     results = game.start()
@@ -132,6 +132,7 @@ def roam2(state):
     game = MazeGame(depan_gedung)
     results = game.start()
     if results == "F1":
+        clear()
         game = MazeGame(lorong_satpam)
         results = game.start()
         if results == "WIN":
@@ -141,6 +142,7 @@ def roam2(state):
             return roam3(state)
 
     elif results == "F2":
+        clear()
         slow_print("kamu di hadapkan dengan pintu terkunci")
         slow_print("saat kamu menoleh ke kanan disana tertulis")
         slow_print('"Tahun kelahiran Bung Tomo"')
@@ -157,6 +159,7 @@ def roam2(state):
             )
             return "game_over"
     elif results == "F3":
+        clear()
         slow_print("kamu memasuki lorong gelap")
         slow_print(
             "tiba tiba ada sosok hitam besar dengan mata merah menyala menghadangmu"
@@ -225,6 +228,7 @@ def ruang_kelas(state):
 
 
 def roam4(state):
+    clear()
     game = MazeGame(ruang_kelas2)
     results = game.start()
     if results == "WIN":
@@ -243,17 +247,20 @@ def roam5(state):
     results = game.start()
 
     if results == "F1":
+        clear()
         slow_print(
             "saat kamu membuka pintu tiba tiba ada mahluk hitam besar yang mencekik dan mematahan lehermu"
         )
         slow_print("keesokkan harinya kamudi temukan tewas di depan pintu F1 sekolahmu")
         return "game_over"
     elif results == "F2":
+        clear()
         slow_print("kamu menemukan kelas kosong")
         state.update({"chapter": 1, "checkpoint": "ruang_kosong"})
         save_game(state)
         return ruang_kosong(state)
     elif results == "F3":
+        clear()
         slow_print("ketika kamu mesuk ke dalam ruangan ")
         slow_print(
             "kamu melihat ada seorang gadis berambut hitam yang sedang duduk di meja pojok belakang kelas sembari memandang langit"
@@ -306,6 +313,7 @@ def roam5(state):
 
 
 def roam5_f3(state):
+    clear()
     game = MazeGame(gedung_sekolah_f3)
     results = game.start()
 
@@ -373,7 +381,6 @@ def roam5_f3(state):
 
 
 def ruang_kosong(state):
-
     clear()
     divider()
     random_delay_text(
@@ -392,6 +399,7 @@ def ruang_kosong(state):
         choice = input_no_empty("\n(ketik 1/2): ").strip()
 
         if choice == "1":
+            clear()
             progress_bar(3, "Menyiapkan ritual...")
             slow_print(
                 "Kamu menyalakan lilin dan membaca mantra dari buku catatan lama."
@@ -407,6 +415,7 @@ def ruang_kosong(state):
             return "game_over"
 
         else:
+            clear()
             slow_print(
                 "Kamu memutuskan untuk tidak melanjutkan ritual dan keluar dari ruangan itu."
             )
@@ -428,6 +437,7 @@ def ruang_kosong(state):
             choice = input_no_empty("\n(ketik 1/2/3): ").strip()
 
             if choice == "1":
+                clear()
                 slow_print("\nKamu menebak dengan benar!")
                 progress_bar(2, "Bayangan itu berteriak marah...")
                 slow_print("Bayangan itu menghancurkan kaca lalu menghilang.")
@@ -455,6 +465,7 @@ def ruang_kosong(state):
                 return "next"
 
             else:
+                clear()
                 random_delay_text(
                     [
                         "Ketiga bayanganmu menatap tajam...",
